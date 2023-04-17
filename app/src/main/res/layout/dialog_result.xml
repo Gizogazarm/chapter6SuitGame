@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hasil Permainan"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
+        android:id="@+id/tv_dialogtitle"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialogtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        android:fontFamily="@font/oneoftheguys"
+        android:textColor="@color/black"
+        android:layout_margin="50dp"
+        android:text="HASIL"
+        android:id="@+id/tv_dialogresult"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialogresult"
+        android:layout_margin="50dp"
+        android:textColor="@color/white"
+        android:text="Main Lagi"
+        android:id="@+id/bt_dialogplayagain"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/bt_dialogplayagain"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:text="Kembali Ke Menu"
+        android:backgroundTint="@color/orange"
+        android:id="@+id/bt_dialogback"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
