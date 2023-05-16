@@ -57,12 +57,6 @@ class LandingPage3 : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (playername.text.isEmpty()){
-                    bt_next.visibility = View.GONE
-                }
-                else{
-                    bt_next.visibility = View.VISIBLE
-                }
             }
         })
 
