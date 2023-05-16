@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import androidx.core.view.isVisible
+import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +40,7 @@ class LandingPage3 : Fragment() {
         val bt_next = view.findViewById<Button>(R.id.bt_next)
         val playername = view.findViewById<EditText>(R.id.et_playername)
         val image_glider = view.findViewById<ImageView>(R.id.iv_landingpage3)
+        val bt_register = view.findViewById<TextView>(R.id.bt_register)
 
 
         Glide.with(this)
@@ -59,6 +59,13 @@ class LandingPage3 : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
+        bt_register.setOnClickListener{
+            val intent = Intent(activity, RegisterActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+
+        }
 
 
 
