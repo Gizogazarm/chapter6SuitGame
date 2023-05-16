@@ -61,6 +61,7 @@ class LandingPage3 : Fragment() {
         })
 
         bt_register.setOnClickListener{
+            bt_register.setBackgroundResource(R.drawable.background_btnclick)
             val intent = Intent(activity, RegisterActivity::class.java)
             startActivity(intent)
             activity?.finish()
