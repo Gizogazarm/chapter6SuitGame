@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,6 +40,13 @@ class LandingPage3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bt_next = view.findViewById<Button>(R.id.bt_next)
         val playername = view.findViewById<EditText>(R.id.et_playername)
+        val image_glider = view.findViewById<ImageView>(R.id.iv_landingpage3)
+
+
+        Glide.with(this)
+            .load("https://i.ibb.co/HC5ZPgD/splash-screen1.png")
+            .circleCrop()
+            .into(image_glider)
 
         playername.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -56,6 +65,8 @@ class LandingPage3 : Fragment() {
                 }
             }
         })
+
+
 
         bt_next.setOnClickListener {
             val intent = Intent(activity, MenuPageActivity::class.java)

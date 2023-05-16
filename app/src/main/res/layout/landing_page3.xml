@@ -1,56 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LandingPage1">
 
     <ImageView
+        android:id="@+id/iv_landingpage3"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="200dp"
-        android:src="@drawable/landing_page3"
-        android:id="@+id/iv_landingpage3"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_landingpage3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_landingpage3"
-        android:text="Tuliskan namamu di bawah"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="23sp"
-        android:fontFamily="@font/oneoftheguys"
-        android:textColor="@color/black"
         android:layout_margin="30dp"
-        android:id="@+id/tv_landingpage3"
-        />
+        android:fontFamily="@font/oneoftheguys"
+        android:text="LOGIN AKUN"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_landingpage3" />
 
     <EditText
+        android:id="@+id/et_playername"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_landingpage3"
         android:layout_marginTop="20dp"
-        android:id="@+id/et_playername"
-        android:hint="Name"
-        />
+        android:hint="Username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_landingpage3" />
 
-    <Button
+
+    <EditText
+        android:id="@+id/et_pasword"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:hint="Pasword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_playername" />
+
+    <TextView
+        android:id="@+id/bt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Belum Punya akun ?"
+        app:fontFamily="@font/oneoftheguys"
+        app:layout_constraintBottom_toTopOf="@+id/bt_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pasword"
+        app:layout_constraintVertical_bias="0.396" />
+
+    <Button
+        android:id="@+id/bt_next"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="50dp"
+        android:hint="Login "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="50dp"
-        android:id="@+id/bt_next"
-        android:hint="next"
-        android:visibility="gone"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pasword"
+        app:layout_constraintVertical_bias="0.611" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
