@@ -2,6 +2,8 @@ package id.rich.challengech5
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -63,8 +65,11 @@ class LandingPage3 : Fragment() {
         bt_register.setOnClickListener{
             bt_register.setBackgroundResource(R.drawable.background_btnclick)
             val intent = Intent(activity, RegisterActivity::class.java)
+            Handler(Looper.getMainLooper()).postDelayed({
+               bt_register.setBackgroundResource(R.drawable.background_btnawal)
+            }, 1000)
+
             startActivity(intent)
-            activity?.finish()
 
         }
 
