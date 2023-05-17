@@ -6,6 +6,8 @@ import id.rich.challengech5.databinding.ActivityRegisterBinding
 
 private lateinit var binding: ActivityRegisterBinding
 
+// testing commit feature register
+
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
