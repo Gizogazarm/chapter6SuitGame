@@ -43,21 +43,21 @@
 
         <Button
             android:id="@+id/btnThemeSetting"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="setting"
             android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/btnGameHistory"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="game history"
             android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/btnLogOut"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="logout"
             android:layout_gravity="center"/>

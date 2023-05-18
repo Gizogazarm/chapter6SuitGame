@@ -13,6 +13,9 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
+        // Buat logic jika database yang terpilih laki - laki maka akan terpilih boy.png begitu sebaliknya
+
 
         btnClickListener()
     }
