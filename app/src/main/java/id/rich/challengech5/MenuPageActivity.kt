@@ -11,14 +11,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 
 class MenuPageActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menu_page)
 
         val playername = intent.getStringExtra("player_name")
         val viewMenuPage = findViewById<ConstraintLayout>(R.id.view_menupage)
-        val snackbar = Snackbar.make(viewMenuPage, "Selamat Datang $playername", Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction("Tutup"){
+        val snackbar =
+            Snackbar.make(viewMenuPage, "Selamat Datang $playername", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("Tutup") {
             snackbar.dismiss()
         }
         snackbar.show()
@@ -28,6 +30,7 @@ class MenuPageActivity : AppCompatActivity() {
         val tv_p2c = findViewById<TextView>(R.id.tv_p2c)
         val ic_profile = findViewById<ImageView>(R.id.ic_profile)
         val intent = Intent(this, GameActivity::class.java)
+
 
         tv_p2p.setText("$playername vs Pemain")
         tv_p2c.setText("$playername vs CPU")
@@ -46,9 +49,12 @@ class MenuPageActivity : AppCompatActivity() {
 
         ic_profile.setOnClickListener {
             ic_profile.setBackgroundResource(R.drawable.bg_button_rounded)
+            val intent = Intent(this,ProfileActivity::class.java)
             Handler(Looper.getMainLooper()).postDelayed({
                 ic_profile.setBackgroundResource(R.drawable.background_btnawal)
             }, 1000)
+
+            startActivity(intent)
         }
     }
 }
