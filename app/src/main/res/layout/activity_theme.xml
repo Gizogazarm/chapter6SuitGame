@@ -6,32 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ThemeActivity">
 
-    <RadioGroup
-        android:id="@+id/rg_themeSetting"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/oneoftheguys"
+        android:text="Theme Options"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/rg_themeOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_theme">
 
         <RadioButton
             android:id="@+id/rb_autoTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AUTO" />
+            android:fontFamily="@font/oneoftheguys"
+            android:text="Auto"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="20dp" />
 
         <RadioButton
             android:id="@+id/rb_lightTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LIGHT" />
+            android:fontFamily="@font/oneoftheguys"
+            android:text="Light"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="20dp" />
 
         <RadioButton
             android:id="@+id/rb_darkTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DARK" />
-
-        <!-- Tambahkan tombol radio lainnya di sini -->
+            android:fontFamily="@font/oneoftheguys"
+            android:text="Dark"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="20dp" />
 
     </RadioGroup>
 
