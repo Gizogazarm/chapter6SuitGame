@@ -7,6 +7,17 @@
     tools:context=".MenuPageActivity"
     android:id="@+id/view_menupage">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="50dp"
+        app:srcCompat="@drawable/batu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
