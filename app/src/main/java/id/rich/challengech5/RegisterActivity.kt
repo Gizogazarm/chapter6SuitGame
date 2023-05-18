@@ -16,6 +16,7 @@ import id.rich.challengech5.databinding.ActivityRegisterBinding
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
 
+
 /*kondisi dimana AKUN berhasil ditambahkan ke database ya , default false */
 private var akunTrue = true
 
