@@ -3,6 +3,8 @@ package id.rich.challengech5
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import id.rich.challengech5.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
@@ -28,7 +30,29 @@ class ProfileActivity : AppCompatActivity() {
 
         }
         binding.btnLogOut.setOnClickListener {
-            startActivity(Intent(this, ThemeActivity::class.java))
+            val builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
+            val view = layoutInflater.inflate(R.layout.dialog_logout,null)
+            builder.setView(view)
+
+            val btnYes = view.findViewById<Button>(R.id.btn_yes)
+            val btnNo = view.findViewById<Button>(R.id.btn_no)
+
+            val dialog = builder.create()
+
+            btnYes.setOnClickListener{
+                val intent = Intent(this, LandingPageActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            btnNo.setOnClickListener{
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(false)
+            dialog.show()
+
+
         }
     }
 }
