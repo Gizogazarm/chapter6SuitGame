@@ -11,8 +11,9 @@ class GameHistory (
     @ColumnInfo("opponent") var opponent: String,
     @ColumnInfo("result") var result: Int
     /*
-    * 0 -> lose
-    * 1 -> win
-    * 2 -> draw
+    * result :
+    * 0 -> draw
+    * 1 -> lose
+    * 2 -> win
     * */
 )

@@ -9,5 +9,10 @@ data class User(
     @PrimaryKey var username: String,
     @ColumnInfo("name") var name: String,
     @ColumnInfo("password") var password: String,
-    @ColumnInfo("gender") var gender:String
+    @ColumnInfo("gender") var gender:Int
+    /*
+   * gender :
+   * 0 -> female
+   * 1 -> male
+   * */
 )
