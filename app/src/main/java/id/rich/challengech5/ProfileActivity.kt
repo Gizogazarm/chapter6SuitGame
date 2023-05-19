@@ -40,8 +40,10 @@ class ProfileActivity : AppCompatActivity() {
             val dialog = builder.create()
 
             btnYes.setOnClickListener{
-                val intent = Intent(this, LandingPageActivity::class.java)
-                startActivity(intent)
+//                val intent = Intent(this, LandingPageActivity::class.java)
+//                startActivity(intent)
+                dialog.dismiss()
+                setResult(3)
                 finish()
             }
 

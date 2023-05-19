@@ -79,7 +79,7 @@ class LandingPage3 : Fragment() {
             val intent = Intent(activity, MenuPageActivity::class.java)
             intent.putExtra("player_name", playername.text.toString())
             startActivity(intent)
-            activity?.finish()
+            requireActivity().finish()
         }
 
 

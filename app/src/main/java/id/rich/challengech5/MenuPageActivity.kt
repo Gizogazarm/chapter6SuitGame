@@ -54,7 +54,16 @@ class MenuPageActivity : AppCompatActivity() {
                 ic_profile.setBackgroundResource(R.drawable.background_btnawal)
             }, 1000)
 
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == 3) {
+            startActivity(Intent(this,LandingPageActivity::class.java))
+            finish()
+        }
+    }
+
 }
