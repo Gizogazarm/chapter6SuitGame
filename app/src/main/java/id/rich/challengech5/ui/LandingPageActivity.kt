@@ -1,12 +1,10 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import me.relex.circleindicator.CircleIndicator
+import id.rich.challengech5.R
 
 class LandingPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +16,7 @@ class LandingPageActivity : AppCompatActivity() {
         val fragments: ArrayList<Fragment> = arrayListOf(
             LandingPage1(),
             LandingPage2(),
-            LandingPage3()
+            LoginFragment()
         )
 
 

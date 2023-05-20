@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import id.rich.challengech5.R
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,10 +24,10 @@ import com.bumptech.glide.Glide
 
 /**
  * A simple [Fragment] subclass.
- * Use the [LandingPage3.newInstance] factory method to
+ * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LandingPage3 : Fragment() {
+class LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     override fun onCreateView(
@@ -34,7 +35,7 @@ class LandingPage3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.landing_page3, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
