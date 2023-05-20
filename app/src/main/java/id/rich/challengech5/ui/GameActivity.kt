@@ -1,6 +1,5 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import id.rich.challengech5.R
 import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
@@ -68,7 +68,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         fun openDialog(result: String){
-            val builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
+            val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
                 .create()
             val view = layoutInflater.inflate(R.layout.dialog_result,null)
             val buttonPlayAgain = view.findViewById<Button>(R.id.bt_dialogplayagain)
@@ -252,7 +252,7 @@ abstract class DeclareGame{
     abstract fun startGame()
 }
 
-class GameBuilder(val player: Player,val enemy: Enemy) : DeclareGame(){
+class GameBuilder(val player: Player, val enemy: Enemy) : DeclareGame(){
 
     override fun computerChoose(){
         val comChoose = Random.nextInt(0,3)

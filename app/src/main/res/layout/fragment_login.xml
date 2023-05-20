@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandingPage1">
+    tools:context=".ui.LandingPage1">
 
     <ImageView
         android:id="@+id/iv_landingpage3"
@@ -40,11 +40,12 @@
 
 
     <EditText
-        android:id="@+id/et_pasword"
+        android:id="@+id/et_password"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:hint="Pasword"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_playername" />
@@ -56,15 +57,15 @@
         android:text="Belum Punya akun ?"
         android:textColor="@color/black"
         app:fontFamily="@font/oneoftheguys"
-        app:layout_constraintBottom_toTopOf="@id/bt_next"
+        app:layout_constraintBottom_toTopOf="@id/bt_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_pasword"
+        app:layout_constraintTop_toBottomOf="@id/et_password"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/bt_next"
+        android:id="@+id/bt_login"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_margin="50dp"

@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity

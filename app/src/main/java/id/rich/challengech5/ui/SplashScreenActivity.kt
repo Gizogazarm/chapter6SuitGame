@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
-import androidx.core.graphics.alpha
 import com.bumptech.glide.Glide
-import kotlin.time.toDuration
+import id.rich.challengech5.R
 
 
 class SplashScreenActivity : AppCompatActivity() {
