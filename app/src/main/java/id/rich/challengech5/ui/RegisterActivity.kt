@@ -78,12 +78,4 @@ class RegisterActivity : AppCompatActivity() {
             imageView.visibility = View.VISIBLE
         }
     }
-
-//    val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
-//
-//    fun register() {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            database.userDao().insertUser(User("riky", "Riky", "pasword", Gender.MALE))
-//        }
-//    }
 }
