@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
+import id.rich.challengech5.view.LoginView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ import kotlinx.coroutines.launch
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginView {
     // TODO: Rename and change types of parameters
 
     override fun onCreateView(
@@ -70,7 +71,7 @@ class LoginFragment : Fragment() {
 
         bt_login.setOnClickListener {
             if (playername.text.isEmpty() || password.text.isEmpty()) {
-                Toast.makeText(activity, "Mohon isi username dan password", Toast.LENGTH_SHORT).show()
+                showMessage("Mohon isi username dan password")
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (database.userDao().getUserByUsername(playername.text.toString(), password.text.toString()).isNotEmpty()) {
@@ -80,7 +81,7 @@ class LoginFragment : Fragment() {
                         requireActivity().finish()
                     } else {
                         Looper.prepare()
-                        Toast.makeText(activity, "Username atau password salah", Toast.LENGTH_SHORT).show()
+                        showMessage("Username atau password salah")
                         Looper.loop()
                     }
                 }
@@ -88,6 +89,10 @@ class LoginFragment : Fragment() {
         }
 
 
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
 }
