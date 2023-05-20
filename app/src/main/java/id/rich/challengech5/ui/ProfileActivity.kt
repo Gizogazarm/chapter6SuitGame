@@ -1,10 +1,11 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import id.rich.challengech5.R
 import id.rich.challengech5.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class ProfileActivity : AppCompatActivity() {
 
         }
         binding.btnLogOut.setOnClickListener {
-            val builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
+            val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
             val view = layoutInflater.inflate(R.layout.dialog_logout,null)
             builder.setView(view)
 
