@@ -27,6 +27,7 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, ThemeActivity::class.java))
         }
         binding.btnGameHistory.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
 
         }
         binding.btnLogOut.setOnClickListener {

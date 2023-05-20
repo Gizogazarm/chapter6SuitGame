@@ -16,4 +16,4 @@ class GameHistory (
     * 1 -> lose
     * 2 -> win
     * */
-)
+    )
