@@ -22,6 +22,7 @@
             android:fontFamily="@font/oneoftheguys"
             />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_show_player"
             android:layout_width="match_parent"
