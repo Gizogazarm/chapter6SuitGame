@@ -1,6 +1,7 @@
 package id.rich.challengech5.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +12,8 @@ import id.rich.challengech5.databinding.ActivityProfileBinding
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +44,11 @@ class ProfileActivity : AppCompatActivity() {
             val dialog = builder.create()
 
             btnYes.setOnClickListener{
-//                val intent = Intent(this, LandingPageActivity::class.java)
-//                startActivity(intent)
+                sharedPreferences = getSharedPreferences("ThemePreferences", MODE_PRIVATE)
+                editor = sharedPreferences.edit()
+                editor.clear()
+                editor.apply()
+
                 dialog.dismiss()
                 setResult(3)
                 finish()

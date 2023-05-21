@@ -39,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
 
         fun register() {
             CoroutineScope(Dispatchers.IO).launch {
-                database.userDao().insertUser(User("rikya", "Riky", "password", Gender.MALE))
+                database.userDao().insertUser(User("riky", "Riky", "password", Gender.MALE))
             }
         }
 
