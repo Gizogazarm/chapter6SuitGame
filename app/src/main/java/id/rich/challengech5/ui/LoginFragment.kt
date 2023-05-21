@@ -1,5 +1,6 @@
 package id.rich.challengech5.ui
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
+import id.rich.challengech5.presenter.LoginPresenter
+import id.rich.challengech5.presenter.LoginPresenterImpl
 import id.rich.challengech5.view.LoginView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +40,7 @@ class LoginFragment : Fragment(), LoginView {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+    private lateinit var playername: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +53,7 @@ class LoginFragment : Fragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bt_login = view.findViewById<Button>(R.id.bt_login)
-        val playername = view.findViewById<EditText>(R.id.et_playername)
+        playername = view.findViewById(R.id.et_playername)
         val password = view.findViewById<EditText>(R.id.et_password)
         val image_glider = view.findViewById<ImageView>(R.id.iv_landingpage3)
         val bt_register = view.findViewById<TextView>(R.id.bt_register)
@@ -68,40 +72,36 @@ class LoginFragment : Fragment(), LoginView {
             }, 1000)
 
             startActivity(intent)
-
         }
 
         val database: GameDatabase by lazy { GameDatabase.getInstance(requireActivity()) }
+        val loginPresenterImpl = LoginPresenterImpl(this, database.userDao())
 
         bt_login.setOnClickListener {
-            if (playername.text.isEmpty() || password.text.isEmpty()) {
-                showMessage("Mohon isi username dan password")
-            } else {
-                CoroutineScope(Dispatchers.IO).launch {
-                    if (database.userDao().getUserByUsername(playername.text.toString(), password.text.toString()).isNotEmpty()) {
-                        sharedPreferences = requireActivity().getSharedPreferences("LoginPreferences", MODE_PRIVATE)
-                        editor = sharedPreferences.edit()
-                        editor.putString("username", playername.text.toString())
-                        editor.apply()
-
-                        val intent = Intent(activity, MenuPageActivity::class.java)
-                        intent.putExtra("player_name", playername.text.toString())
-                        startActivity(intent)
-                        requireActivity().finish()
-                    } else {
-                        Looper.prepare()
-                        showMessage("Username atau password salah")
-                        Looper.loop()
-                    }
-                }
-            }
+            loginPresenterImpl.login(playername.text.toString(), password.text.toString())
         }
-
-
     }
 
     override fun showMessage(message: String) {
+        Looper.prepare()
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+        Looper.loop()
+    }
+
+    override fun nextScreen() {
+        val intent = Intent(activity, MenuPageActivity::class.java)
+        intent.putExtra("player_name", playername.text.toString())
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+    override fun saveLogin() {
+        sharedPreferences = requireActivity().getSharedPreferences("LoginPreferences",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences.edit()
+        editor.putString("username", playername.text.toString())
+        editor.apply()
     }
 
 }
