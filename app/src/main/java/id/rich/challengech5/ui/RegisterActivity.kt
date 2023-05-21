@@ -7,15 +7,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.databinding.ActivityRegisterBinding
 import id.rich.challengech5.model.Gender
 import id.rich.challengech5.model.User
+import id.rich.challengech5.presenter.LoginPresenterImpl
+import id.rich.challengech5.presenter.RegisterPresenterImpl
+import id.rich.challengech5.view.RegisterView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,20 +29,24 @@ private lateinit var binding: ActivityRegisterBinding
 private var akunTrue = true
 
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), RegisterView {
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
+        val name = findViewById<EditText>(R.id.daftar_nama)
+        val username = findViewById<EditText>(R.id.daftar_username)
+        val password = findViewById<EditText>(R.id.daftar_pasword)
+        val rgGender = findViewById<RadioGroup>(R.id.radioGroupGender)
+        val getGenderRadioButtonId = rgGender.checkedRadioButtonId
+        val gender = findViewById<RadioButton>(getGenderRadioButtonId)
+
         val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
 
-        fun register() {
-            CoroutineScope(Dispatchers.IO).launch {
-                database.userDao().insertUser(User("riky", "Riky", "password", Gender.MALE))
-            }
-        }
+        val registerPresenterImpl = RegisterPresenterImpl(this, database)
 
         with(binding) {
 
@@ -55,7 +60,8 @@ class RegisterActivity : AppCompatActivity() {
 
             btnRegister.setOnClickListener {
                 dialogGone(textDialog, imageBerhasil, true)
-                register()
+                registerPresenterImpl.register(username.text.toString(), name.text.toString(), password.text.toString(), gender.text.toString())
+
                 if (akunTrue) {
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
                     builder.setCanceledOnTouchOutside(false)
@@ -84,7 +90,18 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun dialogGone(textView: TextView, imageView: ImageView, boolean: Boolean) {
+    override fun backToLandingPage() {
+        TODO("Not yet implemented")
+    }
+
+    override fun messageError(message: String) {
+        Looper.prepare()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Looper.loop()
+    }
+
+
+    override fun dialogGone(textView: TextView, imageView: ImageView, boolean: Boolean) {
         if (boolean) {
             textView.visibility = View.GONE
             imageView.visibility = View.GONE
