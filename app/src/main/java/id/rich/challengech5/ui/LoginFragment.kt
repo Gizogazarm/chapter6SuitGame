@@ -1,6 +1,8 @@
 package id.rich.challengech5.ui
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -32,7 +34,9 @@ import kotlinx.coroutines.launch
  * create an instance of this fragment.
  */
 class LoginFragment : Fragment(), LoginView {
-    // TODO: Rename and change types of parameters
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +79,11 @@ class LoginFragment : Fragment(), LoginView {
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (database.userDao().getUserByUsername(playername.text.toString(), password.text.toString()).isNotEmpty()) {
+                        sharedPreferences = requireActivity().getSharedPreferences("LoginPreferences", MODE_PRIVATE)
+                        editor = sharedPreferences.edit()
+                        editor.putString("username", playername.text.toString())
+                        editor.apply()
+
                         val intent = Intent(activity, MenuPageActivity::class.java)
                         intent.putExtra("player_name", playername.text.toString())
                         startActivity(intent)

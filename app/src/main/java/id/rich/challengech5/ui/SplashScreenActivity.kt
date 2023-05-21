@@ -35,7 +35,15 @@ class SplashScreenActivity : AppCompatActivity() {
         .into(iv_splashscreen1)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, LandingPageActivity::class.java)
+            sharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE)
+            val username = sharedPreferences.getString("username", "")
+            var intent = Intent(this, LandingPageActivity::class.java)
+
+            if (username != null) {
+                intent = Intent(this, MenuPageActivity::class.java)
+                intent.putExtra("player_name", username)
+            }
+
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()
