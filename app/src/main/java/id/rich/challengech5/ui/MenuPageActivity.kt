@@ -29,7 +29,7 @@ class MenuPageActivity : AppCompatActivity() {
         val iv_p2c = findViewById<ImageView>(R.id.iv_p2c)
         val tv_p2p = findViewById<TextView>(R.id.tv_p2p)
         val tv_p2c = findViewById<TextView>(R.id.tv_p2c)
-        val ic_profile = findViewById<ImageView>(R.id.ic_profile)
+        val ic_profile = findViewById<ImageView>(R.id.iv_profile)
         val intent = Intent(this, GameActivity::class.java)
 
 
