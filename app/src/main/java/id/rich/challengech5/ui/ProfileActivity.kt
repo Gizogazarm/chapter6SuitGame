@@ -44,7 +44,7 @@ class ProfileActivity : AppCompatActivity() {
             val dialog = builder.create()
 
             btnYes.setOnClickListener{
-                sharedPreferences = getSharedPreferences("ThemePreferences", MODE_PRIVATE)
+                sharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE)
                 editor = sharedPreferences.edit()
                 editor.clear()
                 editor.apply()
