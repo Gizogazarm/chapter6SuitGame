@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="85dp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorPrimary"
         android:textSize="30sp"
         android:id="@+id/tv_pickopp"
         />
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorPrimary"
         />
 
     <ImageView
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorPrimary"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

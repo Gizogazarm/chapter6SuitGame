@@ -55,7 +55,6 @@ class ProfileActivity : AppCompatActivity() {
             dialog.setCancelable(false)
             dialog.show()
 
-
         }
     }
 }

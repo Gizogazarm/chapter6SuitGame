@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import id.rich.challengech5.R
 import id.rich.challengech5.databinding.ActivityThemeBinding
 
 class ThemeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityThemeBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +20,7 @@ class ThemeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("ThemePreferences", MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
         val savedTheme = sharedPreferences.getString("theme", "auto")
         when (savedTheme) {
@@ -40,6 +43,14 @@ class ThemeActivity : AppCompatActivity() {
             updateTheme(theme)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val currentTheme = sharedPreferences.getString("theme", "auto")
+        if (currentTheme != null) {
+            updateTheme(currentTheme)
+        }
     }
 
     private fun updateTheme(theme: String) {
