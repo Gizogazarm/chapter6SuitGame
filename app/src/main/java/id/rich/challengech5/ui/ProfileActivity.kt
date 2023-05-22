@@ -13,12 +13,12 @@ import id.rich.challengech5.model.Gender
 import id.rich.challengech5.presenter.ProfilePresenter
 import id.rich.challengech5.view.ProfileContract
 
-
 class ProfileActivity : AppCompatActivity(), ProfileContract.View {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var userDao: UserDao
     private lateinit var presenter: ProfileContract.Presenter
+    private var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +58,7 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
         val btnYes = view.findViewById<Button>(R.id.btn_yes)
         val btnNo = view.findViewById<Button>(R.id.btn_no)
 
-        val dialog = builder.create()
+        dialog = builder.create()
 
         btnYes.setOnClickListener {
             presenter.onLogOutConfirmation()
@@ -68,12 +68,16 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
             presenter.onLogOutCanceled()
         }
 
-        dialog.setCancelable(false)
-        dialog.show()
+        dialog?.setCancelable(false)
+        dialog?.setOnCancelListener {
+            presenter.onLogOutCanceled()
+        }
+        dialog?.show()
     }
 
     override fun dismissDialog() {
-        // Tutup dialog
+        dialog?.dismiss()
+        dialog = null
     }
 
     override fun setResultAndFinish(resultCode: Int) {
