@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
         val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
 
-        val registerPresenterImpl = RegisterPresenterImpl(this, database, database.userDao())
+        val registerPresenterImpl = RegisterPresenterImpl(this, database, database.userDao(), akunTrue)
 
         with(binding) {
 
@@ -57,7 +57,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
             btnRegister.setOnClickListener {
                 dialogGone(textDialog, imageBerhasil, true)
-                registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
+
+                akunTrue = registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
 
                 if (akunTrue) {
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
@@ -87,14 +88,10 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
     }
 
-    override fun backToLandingPage() {
-        TODO("Not yet implemented")
-    }
-
     override fun messageError(message: String) {
-        Looper.prepare()
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        Looper.loop()
+        if (Looper.myLooper() == null){
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
     }
 
 

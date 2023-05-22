@@ -8,5 +8,4 @@ interface RegisterView {
 
     fun messageError(message: String)
 
-    fun backToLandingPage()
 }
