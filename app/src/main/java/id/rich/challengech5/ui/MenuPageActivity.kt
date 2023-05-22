@@ -1,5 +1,6 @@
 package id.rich.challengech5.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import id.rich.challengech5.R
+import id.rich.challengech5.database.UserDao
 
 class MenuPageActivity : AppCompatActivity() {
 
@@ -51,12 +53,14 @@ class MenuPageActivity : AppCompatActivity() {
         ic_profile.setOnClickListener {
             ic_profile.setBackgroundResource(R.drawable.bg_button_rounded)
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("player_name", playername)
             Handler(Looper.getMainLooper()).postDelayed({
                 ic_profile.setBackgroundResource(R.drawable.background_btnawal)
             }, 1000)
 
             startActivityForResult(intent, 1)
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -36,7 +36,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             sharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE)
-            val username = sharedPreferences.getString("username", "")
+            val username = sharedPreferences.getString("username", null)
             var intent = Intent(this, LandingPageActivity::class.java)
 
             if (username != null) {
