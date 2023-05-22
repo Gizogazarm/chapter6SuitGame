@@ -90,7 +90,9 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     override fun messageError(message: String) {
         if (Looper.myLooper() == null){
+            Looper.prepare()
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            Looper.loop()
         }
     }
 

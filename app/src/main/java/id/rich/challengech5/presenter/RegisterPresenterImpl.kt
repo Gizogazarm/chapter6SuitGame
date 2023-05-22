@@ -28,7 +28,7 @@ class RegisterPresenterImpl(private val view: RegisterView, private val database
             //sudah isi semua field, cek username sudah digunakan atau belum
             CoroutineScope(Dispatchers.IO).launch {
                 if (userDao.getDuplicateUser(username).isEmpty()){
-                    var genderInsert : Gender
+                    val genderInsert : Gender
 
                     genderInsert = when(gender){
                         "Laki-laki" -> Gender.MALE
@@ -42,9 +42,7 @@ class RegisterPresenterImpl(private val view: RegisterView, private val database
                         genderInsert
                     )
 
-                    database.userDao().insertUser(objectUser)
-
-                    if (userDao.getDuplicateUser(username).isNotEmpty()){
+                    if(database.userDao().insertUser(objectUser) > 0){
                         akunTrue = true
                     }
                     else{
