@@ -12,7 +12,7 @@ interface GameHistoryDao {
     suspend fun insertGameHistory(gameHistory: GameHistory)
 
     @Query("SELECT * FROM game_history")
-    fun getAllGameHistory(): List<GameHistory>
+    suspend fun getAllGameHistory(): List<GameHistory>
 
 
     @Query("SELECT * FROM GAME_HISTORY WHERE " +
@@ -21,4 +21,3 @@ interface GameHistoryDao {
 
 
 }
-
