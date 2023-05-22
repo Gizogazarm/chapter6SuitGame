@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,7 +11,14 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import id.rich.challengech5.R
+import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.databinding.ActivityRegisterBinding
+import id.rich.challengech5.model.Gender
+import id.rich.challengech5.model.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
@@ -28,6 +35,14 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
+
+        fun register() {
+            CoroutineScope(Dispatchers.IO).launch {
+                database.userDao().insertUser(User("riky", "Riky", "password", Gender.MALE))
+            }
+        }
+
         with(binding) {
 
             val builder =
@@ -40,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
 
             btnRegister.setOnClickListener {
                 dialogGone(textDialog, imageBerhasil, true)
+                register()
                 if (akunTrue) {
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
                     builder.setCanceledOnTouchOutside(false)

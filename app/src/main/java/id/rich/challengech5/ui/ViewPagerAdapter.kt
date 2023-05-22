@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

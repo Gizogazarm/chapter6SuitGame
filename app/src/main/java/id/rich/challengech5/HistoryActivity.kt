@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.databinding.ActivityHistoryBinding
+import id.rich.challengech5.ui.ProfileActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
