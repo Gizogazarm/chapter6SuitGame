@@ -15,9 +15,6 @@ import id.rich.challengech5.database.UserDao
 
 class MenuPageActivity : AppCompatActivity() {
 
-    private lateinit var userDAO: UserDao
-    private lateinit var newUser: UserDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menu_page)
@@ -56,6 +53,7 @@ class MenuPageActivity : AppCompatActivity() {
         ic_profile.setOnClickListener {
             ic_profile.setBackgroundResource(R.drawable.bg_button_rounded)
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("player_name", playername)
             Handler(Looper.getMainLooper()).postDelayed({
                 ic_profile.setBackgroundResource(R.drawable.background_btnawal)
             }, 1000)
