@@ -1,5 +1,6 @@
 package id.rich.challengech5.presenter
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import id.rich.challengech5.database.GameDatabase
@@ -15,19 +16,21 @@ import kotlinx.coroutines.launch
 class RegisterPresenterImpl(private val view: RegisterView, private val database: GameDatabase, private val userDao: UserDao,  var akunTrue: Boolean) : RegisterPresenter {
     override fun register(username: String, name: String, password: String, gender: String) : Boolean {
 
-        if (username.isEmpty()) {
-            view.messageError("Mohon isi username")
-        }
-        else if(name.isEmpty()){
+        if (name.isEmpty()) {
             view.messageError("Mohon isi nama")
+            akunTrue = false
+        }
+        else if(username.isEmpty()){
+            view.messageError("Mohon isi username")
+            akunTrue = false
         }
         else if (password.isEmpty()){
             view.messageError("Mohon isi password")
+            akunTrue = false
         }
         else{
-            //sudah isi semua field, cek username sudah digunakan atau belum
             CoroutineScope(Dispatchers.IO).launch {
-                if (userDao.getDuplicateUser(username).isEmpty()){
+                if (userDao?.findUserByUsername(username) != null){
                     val genderInsert : Gender
 
                     genderInsert = when(gender){
@@ -51,6 +54,7 @@ class RegisterPresenterImpl(private val view: RegisterView, private val database
                 }
                 else{
                     view.messageError("Username sudah pernah digunakan")
+                    akunTrue = false
                 }
             }
         }

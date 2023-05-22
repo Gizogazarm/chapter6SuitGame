@@ -56,9 +56,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             builder.setView(view)
 
             btnRegister.setOnClickListener {
-                dialogGone(textDialog, imageBerhasil, true)
-
                 akunTrue = registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
+                dialogGone(textDialog, imageBerhasil, akunTrue)
 
                 if (akunTrue) {
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
@@ -89,11 +88,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     override fun messageError(message: String) {
-        if (Looper.myLooper() == null){
-            Looper.prepare()
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-            Looper.loop()
-        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 
