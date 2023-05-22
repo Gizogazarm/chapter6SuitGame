@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -20,13 +21,14 @@ import id.rich.challengech5.view.RegisterView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.nio.file.attribute.AclEntry.Builder
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
 
 
 /*kondisi dimana AKUN berhasil ditambahkan ke database ya , default false */
-private var akunTrue = true
+private var akunTrue = false
 
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
@@ -57,9 +59,11 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
             btnRegister.setOnClickListener {
                 akunTrue = registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
-                dialogGone(textDialog, imageBerhasil, akunTrue)
+                //Log.d("regist123", "akunTrue: $akunTrue")
 
                 if (akunTrue) {
+                    dialogGone(textDialog, imageBerhasil, false)
+
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
                     builder.setCanceledOnTouchOutside(false)
                     builder.show()
@@ -83,12 +87,23 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                     }, 1000)
 
                 }
+
             }
         }
     }
 
-    override fun messageError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    override fun messageError(message: String, boolean: Boolean) {
+        //Log.d("regist123", "loop : "+ Looper.myLooper())
+        if (boolean == false){
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
+        else{
+            if (Looper.myLooper() == null){
+                Looper.prepare()
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                Looper.loop()
+            }
+        }
     }
 
 
