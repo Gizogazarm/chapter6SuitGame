@@ -11,38 +11,38 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChallengeCH5"
+        android:theme="@style/Theme.chapter6SuitGame"
         tools:targetApi="31">
         <activity
-            android:name=".ThemeActivity"
+            android:name=".ui.ThemeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".ui.ProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".GameActivity"
+            android:name=".ui.GameActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuPageActivity"
+            android:name=".ui.MenuPageActivity"
             android:exported="false" />
         <activity
-            android:name=".LandingPageActivity"
+            android:name=".ui.LandingPageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
             android:screenOrientation="portrait">

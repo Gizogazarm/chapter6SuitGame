@@ -1,9 +1,10 @@
-package id.rich.challengech5
+package id.rich.challengech5.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import id.rich.challengech5.model.GameHistory
 
 @Dao
 interface GameHistoryDao {

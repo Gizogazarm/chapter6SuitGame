@@ -1,20 +1,20 @@
-package id.rich.challengech5
+package id.rich.challengech5.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import id.rich.challengech5.R
 
 @Entity(tableName = "game_history")
-class GameHistory (
+data class GameHistory (
     @PrimaryKey(autoGenerate = true) var id_game: Int?,
     @ColumnInfo("username") var username: String,
     @ColumnInfo("opponent") var opponent: String,
-    @ColumnInfo("result") var result: Int
+    @ColumnInfo("result") var result: GameResult
     /*
     * result :
     * 0 -> draw
@@ -31,3 +31,4 @@ class GameHistory (
         return ViewHolder(view)
     }
 }
+enum class GameResult {DRAW, LOSE, WIN}
