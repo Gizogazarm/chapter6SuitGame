@@ -1,5 +1,6 @@
 package id.rich.challengech5.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +11,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import id.rich.challengech5.R
+import id.rich.challengech5.database.UserDao
 
 class MenuPageActivity : AppCompatActivity() {
+
+    private lateinit var userDAO: UserDao
+    private lateinit var newUser: UserDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +62,7 @@ class MenuPageActivity : AppCompatActivity() {
 
             startActivityForResult(intent, 1)
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -28,5 +28,6 @@ class LoginPresenterImpl (private val view: LoginView, private val userDao: User
                     view.showMessage("Username atau password salah")
                 }
             }
-        }    }
+        }
+    }
 }
