@@ -19,4 +19,5 @@
     <color name="grayblue">#85AED6</color>
     <color name="red">#FF1100</color>
     <color name="orange">#FF9800</color>
+    <color name="gray">#555555</color>
 </resources>

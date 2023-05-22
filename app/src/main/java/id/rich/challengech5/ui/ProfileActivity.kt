@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import id.rich.challengech5.HistoryActivity
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.database.UserDao
@@ -61,6 +62,7 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, ThemeActivity::class.java))
         }
         binding.btnGameHistory.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
 
         }
         binding.btnLogOut.setOnClickListener {

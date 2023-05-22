@@ -10,6 +10,11 @@ data class User(
     @ColumnInfo("name") var name: String,
     @ColumnInfo("password") var password: String,
     @ColumnInfo("gender") var gender: Gender
+    /*
+   * gender :
+   * 0 -> female
+   * 1 -> male
+   * */
 )
-
 enum class Gender {FEMALE, MALE}
+
