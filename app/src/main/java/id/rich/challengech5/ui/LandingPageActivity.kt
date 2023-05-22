@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import id.rich.challengech5.R
+import me.relex.circleindicator.CircleIndicator3
 
 class LandingPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,11 +21,11 @@ class LandingPageActivity : AppCompatActivity() {
         )
 
 
-
+        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
         val adapter = ViewPagerAdapter(fragments, this)
         viewPager.adapter = adapter
         viewPager.setAdapter(adapter)
-
+        indicator.setViewPager(viewPager)
 
     }
 }

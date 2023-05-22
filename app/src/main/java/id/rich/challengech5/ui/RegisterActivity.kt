@@ -37,16 +37,13 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         setContentView(binding.root)
 
         //val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
-        val name = findViewById<EditText>(R.id.daftar_nama)
-        val username = findViewById<EditText>(R.id.daftar_username)
-        val password = findViewById<EditText>(R.id.daftar_pasword)
         val rgGender = findViewById<RadioGroup>(R.id.radioGroupGender)
         val getGenderRadioButtonId = rgGender.checkedRadioButtonId
         val gender = findViewById<RadioButton>(getGenderRadioButtonId)
 
         val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
 
-        val registerPresenterImpl = RegisterPresenterImpl(this, database)
+        val registerPresenterImpl = RegisterPresenterImpl(this, database, database.userDao())
 
         with(binding) {
 
@@ -60,7 +57,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
             btnRegister.setOnClickListener {
                 dialogGone(textDialog, imageBerhasil, true)
-                registerPresenterImpl.register(username.text.toString(), name.text.toString(), password.text.toString(), gender.text.toString())
+                registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
 
                 if (akunTrue) {
                     // dibuat ketika koneksi database berhasil / berhasil input ke database

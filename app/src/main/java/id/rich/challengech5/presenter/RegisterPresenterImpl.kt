@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegisterPresenterImpl(private val view: RegisterView, private val database: GameDatabase) : RegisterPresenter {
+class RegisterPresenterImpl(private val view: RegisterView, private val database: GameDatabase, private val userDao: UserDao) : RegisterPresenter {
     override fun register(username: String, name: String, password: String, gender: String) {
 
         if (username.isEmpty()) {
@@ -25,22 +25,28 @@ class RegisterPresenterImpl(private val view: RegisterView, private val database
             view.messageError("Mohon isi password")
         }
         else{
-            var genderInsert : Gender
-
-            genderInsert = when(gender){
-                "Laki-laki" -> Gender.MALE
-                else -> Gender.FEMALE
-            }
-
-            val objectUser = User(
-                username,
-                name,
-                password,
-                genderInsert
-            )
-
+            //sudah isi semua field, cek username sudah digunakan atau belum
             CoroutineScope(Dispatchers.IO).launch {
-                database.userDao().insertUser(objectUser)
+                if (userDao.getUserByUsername(username, password).isNotEmpty()){
+                    var genderInsert : Gender
+
+                    genderInsert = when(gender){
+                        "Laki-laki" -> Gender.MALE
+                        else -> Gender.FEMALE
+                    }
+
+                    val objectUser = User(
+                        username,
+                        name,
+                        password,
+                        genderInsert
+                    )
+
+                    database.userDao().insertUser(objectUser)
+                }
+                else{
+                    view.messageError("Username sudah pernah digunakan")
+                }
             }
         }
     }
