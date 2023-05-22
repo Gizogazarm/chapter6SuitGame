@@ -7,23 +7,53 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import id.rich.challengech5.R
+import id.rich.challengech5.database.GameDatabase
+import id.rich.challengech5.database.UserDao
 import id.rich.challengech5.databinding.ActivityProfileBinding
+import id.rich.challengech5.model.Gender
+import id.rich.challengech5.model.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+    private lateinit var userDao: UserDao
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        // Buat logic jika database yang terpilih laki - laki maka akan terpilih boy.png begitu sebaliknya
 
-
+        setDataProfil()
         btnClickListener()
+    }
+
+    private fun setDataProfil () {
+        val db = GameDatabase.getInstance(this)
+        userDao = db.userDao()
+        val username = intent.getStringExtra("player_name")
+
+        CoroutineScope(Dispatchers.IO).launch {
+            if (username != null) {
+                user = userDao.findUserByUsername(username)
+            }
+            binding.tvNamaUser.text = user.name
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            if (username != null) {
+                user = userDao.findUserByUsername(username)
+                if (user.gender == Gender.FEMALE) {
+                    binding.ivGender.setImageResource(R.drawable.girl)
+                }
+            }
+        }
+
     }
 
     private fun btnClickListener() {
@@ -35,7 +65,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         binding.btnLogOut.setOnClickListener {
             val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
-            val view = layoutInflater.inflate(R.layout.dialog_logout,null)
+            val view = layoutInflater.inflate(R.layout.dialog_logout, null)
             builder.setView(view)
 
             val btnYes = view.findViewById<Button>(R.id.btn_yes)
@@ -43,7 +73,7 @@ class ProfileActivity : AppCompatActivity() {
 
             val dialog = builder.create()
 
-            btnYes.setOnClickListener{
+            btnYes.setOnClickListener {
                 sharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE)
                 editor = sharedPreferences.edit()
                 editor.clear()
@@ -54,7 +84,7 @@ class ProfileActivity : AppCompatActivity() {
                 finish()
             }
 
-            btnNo.setOnClickListener{
+            btnNo.setOnClickListener {
                 dialog.dismiss()
             }
 
@@ -63,4 +93,5 @@ class ProfileActivity : AppCompatActivity() {
 
         }
     }
+
 }
