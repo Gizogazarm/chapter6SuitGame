@@ -24,7 +24,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_show_player"
+            android:id="@+id/rv_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
