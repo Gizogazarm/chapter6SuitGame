@@ -11,7 +11,7 @@ import id.rich.challengech5.R
 
 @Entity(tableName = "game_history")
 data class GameHistory(
-    @PrimaryKey(autoGenerate = true) var id_game: String,
+    @PrimaryKey(autoGenerate = true) var id_game: Int,
     @ColumnInfo("username") var username: String,
     @ColumnInfo("opponent") var opponent: String,
     @ColumnInfo("result") var result: GameResult
