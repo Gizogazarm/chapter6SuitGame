@@ -6,22 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.databinding.ActivityRegisterBinding
-import id.rich.challengech5.model.Gender
-import id.rich.challengech5.model.User
-import id.rich.challengech5.presenter.LoginPresenterImpl
 import id.rich.challengech5.presenter.RegisterPresenterImpl
 import id.rich.challengech5.view.RegisterView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.nio.file.attribute.AclEntry.Builder
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
@@ -45,7 +37,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
         val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
 
-        val registerPresenterImpl = RegisterPresenterImpl(this, database, database.userDao(), akunTrue)
+        val registerPresenterImpl = RegisterPresenterImpl(this, database.userDao())
 
         with(binding) {
 
@@ -58,7 +50,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             builder.setView(view)
 
             btnRegister.setOnClickListener {
-                akunTrue = registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
+                akunTrue = registerPresenterImpl.register(daftarUsername.text.toString(),
+                    daftarNama.text.toString(), daftarPasword.text.toString(), gender.text.toString())
                 //Log.d("regist123", "akunTrue: $akunTrue")
 
                 if (akunTrue) {
@@ -92,17 +85,16 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
     }
 
-    override fun messageError(message: String, boolean: Boolean) {
+    override fun messageError(message: String, looper: Boolean) {
         //Log.d("regist123", "loop : "+ Looper.myLooper())
-        if (boolean == false){
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        }
-        else{
+        if (looper) {
             if (Looper.myLooper() == null){
                 Looper.prepare()
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 Looper.loop()
             }
+        } else {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
     }
 
