@@ -7,12 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import id.rich.challengech5.model.GameHistory
 
-class ShowHistoryAdapter(val listPlayer: String): RecyclerView.Adapter<GameHistory.ViewHolder>() {
+class ShowHistoryAdapter(val listHistory: List<GameHistory>): RecyclerView.Adapter<GameHistory.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameHistory.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.history, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_history, parent, false)
         return GameHistory.ViewHolder(view)
     }
 
@@ -20,11 +20,11 @@ class ShowHistoryAdapter(val listPlayer: String): RecyclerView.Adapter<GameHisto
         val tvMode: TextView = holder.itemView.findViewById(R.id.tv_content_mode)
         val tvMsg: TextView = holder.itemView.findViewById(R.id.tv_content_msg)
 
-        tvMode.text = listPlayer[position].toString()
-        tvMsg.text = listPlayer[position].toString()
+        tvMode.text = listHistory[position].opponent
+        tvMsg.text = listHistory[position].username
     }
 
     override fun getItemCount(): Int {
-        return listPlayer.length
+        return listHistory.size
     }
 }

@@ -11,13 +11,11 @@ import id.rich.challengech5.ui.ProfileActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHistoryBinding
-    private var mDb : GameDatabase? = null
+    private var mDb: GameDatabase? = null
     var valID: String = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +24,13 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(view)
 
         supportActionBar?.hide()
-        valID = intent.getStringExtra("vaLID").toString()
+        valID = intent.getStringExtra("valID").toString()
         Log.d("VAL_ID", valID)
 
         mDb = GameDatabase.getInstance(this@HistoryActivity)
-        binding.rvPlayer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        ferchData()
-
+        binding.rvPlayer.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        fetchData()
     }
 
     override fun onBackPressed() {
@@ -41,11 +39,11 @@ class HistoryActivity : AppCompatActivity() {
         finish()
     }
 
-    fun ferchData(){
+    fun fetchData() {
         GlobalScope.launch {
             val listSuit = mDb?.gameHistoryDao()?.findGameHistoryByUsername(valID.toInt())
 
-            runOnUiThread{
+            runOnUiThread {
                 listSuit?.let {
                     val adapter = ShowHistoryAdapter(it)
                     binding.rvPlayer.adapter = adapter

@@ -34,7 +34,7 @@ class GameActivity : AppCompatActivity() {
         val close = findViewById<ImageView>(R.id.iv_close)
         val refresh = findViewById<ImageView>(R.id.iv_refresh)
 
-        val player = Player()
+        val player = Player("opponent", "opponent")
         val enemy = Enemy()
         val game = GameBuilder(player, enemy)
         var result = ""
@@ -213,7 +213,7 @@ abstract class PlayerImplementation {
     abstract fun getStatus(): String
 }
 
-class Player: PlayerImplementation() {
+class Player(s: String, s1: String) : PlayerImplementation() {
     private var point = 0
     private var status = "KALAH"
 
