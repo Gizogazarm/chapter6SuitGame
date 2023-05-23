@@ -6,42 +6,46 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import id.rich.challengech5.R
 import id.rich.challengech5.database.GameDatabase
 import id.rich.challengech5.databinding.ActivityRegisterBinding
 import id.rich.challengech5.model.Gender
 import id.rich.challengech5.model.User
+import id.rich.challengech5.presenter.LoginPresenterImpl
+import id.rich.challengech5.presenter.RegisterPresenterImpl
+import id.rich.challengech5.view.RegisterView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.nio.file.attribute.AclEntry.Builder
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
 
 
 /*kondisi dimana AKUN berhasil ditambahkan ke database ya , default false */
-private var akunTrue = true
+private var akunTrue = false
 
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), RegisterView {
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
+        val rgGender = findViewById<RadioGroup>(R.id.radioGroupGender)
+        val getGenderRadioButtonId = rgGender.checkedRadioButtonId
+        val gender = findViewById<RadioButton>(getGenderRadioButtonId)
+
         val database: GameDatabase by lazy { GameDatabase.getInstance(this) }
 
-        fun register() {
-            CoroutineScope(Dispatchers.IO).launch {
-                database.userDao().insertUser(User("riky", "Riky", "password", Gender.MALE))
-            }
-        }
+        val registerPresenterImpl = RegisterPresenterImpl(this, database, database.userDao(), akunTrue)
 
         with(binding) {
 
@@ -54,9 +58,12 @@ class RegisterActivity : AppCompatActivity() {
             builder.setView(view)
 
             btnRegister.setOnClickListener {
-                dialogGone(textDialog, imageBerhasil, true)
-                register()
+                akunTrue = registerPresenterImpl.register(binding.daftarUsername.text.toString(), binding.daftarNama.text.toString(), binding.daftarPasword.text.toString(), gender.text.toString())
+                //Log.d("regist123", "akunTrue: $akunTrue")
+
                 if (akunTrue) {
+                    dialogGone(textDialog, imageBerhasil, false)
+
                     // dibuat ketika koneksi database berhasil / berhasil input ke database
                     builder.setCanceledOnTouchOutside(false)
                     builder.show()
@@ -80,11 +87,27 @@ class RegisterActivity : AppCompatActivity() {
                     }, 1000)
 
                 }
+
             }
         }
     }
 
-    private fun dialogGone(textView: TextView, imageView: ImageView, boolean: Boolean) {
+    override fun messageError(message: String, boolean: Boolean) {
+        //Log.d("regist123", "loop : "+ Looper.myLooper())
+        if (boolean == false){
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
+        else{
+            if (Looper.myLooper() == null){
+                Looper.prepare()
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                Looper.loop()
+            }
+        }
+    }
+
+
+    override fun dialogGone(textView: TextView, imageView: ImageView, boolean: Boolean) {
         if (boolean) {
             textView.visibility = View.GONE
             imageView.visibility = View.GONE

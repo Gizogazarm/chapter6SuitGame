@@ -9,7 +9,7 @@ import id.rich.challengech5.model.User
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertUser(user: User)
+    suspend fun insertUser(user: User) : Long
 
     @Query("SELECT * FROM user")
     suspend fun getAllUser(): List<User>
