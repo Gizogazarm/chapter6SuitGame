@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.*
@@ -17,11 +16,6 @@ import id.rich.challengech5.view.RegisterView
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRegisterBinding
-
-
-/*kondisi dimana AKUN berhasil ditambahkan ke database ya , default false */
-private var akunTrue = false
-
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
     @SuppressLint("InflateParams")
@@ -50,54 +44,58 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             builder.setView(view)
 
             btnRegister.setOnClickListener {
-                akunTrue = registerPresenterImpl.register(daftarUsername.text.toString(),
+                registerPresenterImpl.register(daftarUsername.text.toString(),
                     daftarNama.text.toString(), daftarPasword.text.toString(), gender.text.toString())
-                //Log.d("regist123", "akunTrue: $akunTrue")
 
-                if (akunTrue) {
-                    dialogGone(textDialog, imageBerhasil, false)
+//                if (akunTrue) {
 
-                    // dibuat ketika koneksi database berhasil / berhasil input ke database
-                    builder.setCanceledOnTouchOutside(false)
-                    builder.show()
+//                    dialogGone(textDialog, imageBerhasil, false)
+//
+//                    // dibuat ketika koneksi database berhasil / berhasil input ke database
+//                    builder.setCanceledOnTouchOutside(false)
+//                    builder.show()
+//
+//                    Handler(Looper.getMainLooper()).postDelayed({
+//                        progressBar.visibility = View.VISIBLE
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            progressBar.visibility = View.GONE
+//                            dialogGone(textDialog, imageBerhasil, false)
+//                            Handler(Looper.getMainLooper()).postDelayed(
+//                                {
+//                                    val intent = Intent(
+//                                        this@RegisterActivity,
+//                                        LandingPageActivity::class.java
+//                                    )
+//                                    startActivity(intent)
+//                                },
+//                                3000
+//                            ) // Penundaan sebelum intent ke LandingPageActivity, disetel menjadi 3000 (3 detik)
+//                        }, 3000) // Penundaan dialogGone selama 3 detik sebelum intent
+//                    }, 1000)
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        progressBar.visibility = View.VISIBLE
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            progressBar.visibility = View.GONE
-                            dialogGone(textDialog, imageBerhasil, false)
-                            Handler(Looper.getMainLooper()).postDelayed(
-                                {
-                                    val intent = Intent(
-                                        this@RegisterActivity,
-                                        LandingPageActivity::class.java
-                                    )
-                                    startActivity(intent)
-                                },
-                                3000
-                            ) // Penundaan sebelum intent ke LandingPageActivity, disetel menjadi 3000 (3 detik)
-                        }, 3000) // Penundaan dialogGone selama 3 detik sebelum intent
-                    }, 1000)
-
-                }
+//                }
 
             }
         }
     }
 
-    override fun messageError(message: String, looper: Boolean) {
+    override fun showMessage(message: String, looper: Boolean) {
         //Log.d("regist123", "loop : "+ Looper.myLooper())
         if (looper) {
             if (Looper.myLooper() == null){
                 Looper.prepare()
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 Looper.loop()
             }
         } else {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 
+    override fun nextScreen() {
+        finish()
+        showMessage("Register berhasil", true)
+    }
 
     override fun dialogGone(textView: TextView, imageView: ImageView, boolean: Boolean) {
         if (boolean) {

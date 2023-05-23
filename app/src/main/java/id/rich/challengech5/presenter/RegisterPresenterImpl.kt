@@ -1,8 +1,6 @@
 package id.rich.challengech5.presenter
 
-import android.util.Log
-import androidx.room.Room
-import id.rich.challengech5.database.GameDatabase
+import android.widget.Toast
 import id.rich.challengech5.database.UserDao
 import id.rich.challengech5.model.Gender
 import id.rich.challengech5.model.User
@@ -12,17 +10,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterPresenterImpl(private val view: RegisterView, private val userDao: UserDao) : RegisterPresenter {
-    override fun register(username: String, name: String, password: String, gender: String) : Boolean {
-        var akunTrue = false
-
+    override fun register(username: String, name: String, password: String, gender: String) {
         if (name.isEmpty()) {
-            view.messageError("Mohon isi nama", false)
+            view.showMessage("Mohon isi nama", false)
         }
         else if(username.isEmpty()){
-            view.messageError("Mohon isi username", false)
+            view.showMessage("Mohon isi username", false)
         }
         else if (password.isEmpty()){
-            view.messageError("Mohon isi password", false)
+            view.showMessage("Mohon isi password", false)
         }
         else{
             CoroutineScope(Dispatchers.IO).launch {
@@ -35,14 +31,13 @@ class RegisterPresenterImpl(private val view: RegisterView, private val userDao:
                     }
 
                     if(userDao.insertUser(User(username, name, password, genderInsert)) > 0){
-                        akunTrue = true
+                        view.nextScreen()
                     }
                 }
                 else{
-                    view.messageError("Username sudah pernah digunakan",true)
+                    view.showMessage("Username sudah pernah digunakan",true)
                 }
             }
         }
-        return akunTrue
     }
 }
