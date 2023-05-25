@@ -213,21 +213,21 @@ abstract class PlayerImplementation {
     abstract fun getStatus(): String
 }
 
-class Player: PlayerImplementation() {
+class Player() {
     private var point = 0
     private var status = "KALAH"
 
-    override fun getPoint(): Int = point
+    fun getPoint(): Int = point
 
-    override fun setPoint(choose: Int){
+    fun setPoint(choose: Int){
         this.point = choose
     }
 
-    override fun setStatus(status: String) {
+    fun setStatus(status: String) {
         this.status = status
     }
 
-    override fun getStatus(): String = status
+    fun getStatus(): String = status
 }
 
 class Enemy: PlayerImplementation() {

@@ -13,4 +13,11 @@ interface GameHistoryDao {
 
     @Query("SELECT * FROM game_history")
     suspend fun getAllGameHistory(): List<GameHistory>
+
+
+    @Query("SELECT * FROM GAME_HISTORY WHERE " +
+            "username = :username")
+    fun findGameHistoryByUsername(username: Int): List<GameHistory>
+
+
 }
