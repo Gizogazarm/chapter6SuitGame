@@ -15,7 +15,7 @@ import id.rich.challengech5.presenter.RegisterPresenterImpl
 import id.rich.challengech5.view.RegisterView
 
 @SuppressLint("StaticFieldLeak")
-private lateinit var binding: ActivityRegisterBinding
+lateinit var binding: ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
     @SuppressLint("InflateParams")

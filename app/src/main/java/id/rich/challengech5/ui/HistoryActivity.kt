@@ -1,4 +1,4 @@
-package id.rich.challengech5
+package id.rich.challengech5.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.rich.challengech5.database.GameDatabase
-import id.rich.challengech5.databinding.ActivityHistoryBinding
-import id.rich.challengech5.ui.ProfileActivity
+import id.rich.challengech5.binding.ActivityHistoryBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class HistoryActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityHistoryBinding
-    private var mDb: GameDatabase? = null
-    var valID: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +23,7 @@ class HistoryActivity : AppCompatActivity() {
         Log.d("VAL_ID", valID)
 
         mDb = GameDatabase.getInstance(this@HistoryActivity)
-        binding.rvPlayer.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvPlayer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         fetchData()
     }
 
@@ -52,3 +46,4 @@ class HistoryActivity : AppCompatActivity() {
         }
     }
 }
+
