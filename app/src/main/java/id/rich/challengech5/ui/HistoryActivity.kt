@@ -47,61 +47,36 @@
 //    }
 //}
 //
+
 package id.rich.challengech5.ui
 
-import java.util.Arrays
-import java.util.Arrays.asList
-
-interface History {
-    interface View {
-        fun showProgress()
-        fun hideProgress()
-        fun setString(string: String?)
-    }
-
-    interface Model {
-        interface OnFinishedListener {
-            fun onFinished(string: String?)
-        }
-        fun getNextHistory(onFinishedListener: OnFinishedListener?)
-    }
-
-    interface Presenter {
-        fun onButtonClick()
-
-        fun onDestroy()
-    }
-}
-
-import android.os.Handler
-
-class Model : History.Model {
-    private val arrayList =
-        Arrays.asList(
-
-        )asList(
-
-        )
-
-    override fun getNextHistory(onFinishedListener: History.Model.OnFinishedListener?) {
-        Handler().postDelayed({ onFinishedListener!!.onFinished(getRandomString)}, 1200)
-    }
-
-    private val getRandomString: String
-
-}
-
-
-
-
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import org.jetbrains.annotations.Contract
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.rich.challengech5.databinding.ActivityHistoryBinding
 
-class HistoryActivity : AppCompatActivity(), Contract.View{
+class HistoryActivity : AppCompatActivity(){
+    private lateinit var binding: ActivityHistoryBinding
+    private lateinit var adapter: ShowHistoryAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        binding = ActivityHistoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        adapter = ShowHistoryAdapter(arrayListOf(), this@HistoryActivity)
+        binding.rvPlayer.layoutManager = LinearLayoutManager(this)
+        binding.rvPlayer.setHasFixedSize(true)
+        binding.rvPlayer.adapter = adapter
+        getSharedPreferences()
+
+    }
+
+    fun getSharedPreferences() {
+        TODO("Not yet implemented")
+    }
 
 }
+
+
